@@ -26,13 +26,26 @@ struct AppointmentView: View {
         existingClients.contains { $0.clientPhone == clientPhone }
     }
     
+    private var isNameValid: Bool {
+        !clientName.trimmingCharacters(in: .whitespaces).isEmpty
+    }
+    
+    private var isPhoneValid: Bool {
+        let digits = clientPhone.filter { $0.isNumber }
+        return digits.count == 10
+    }
+    
+    private var canSave: Bool {
+        isNameValid && isPhoneValid
+    }
+    
     var body: some View {
         Form {
             Section {
                 TextField("Όνομα Πελάτισσας", text: $clientName)
                 TextField("Υπηρεσία", text: $service)
                 TextField("Τηλέφωνο", text: $clientPhone)
-                    .keyboardType(.phonePad)
+                    .keyboardType(.numberPad)
                 DatePicker("Ημερομηνία", selection: $date, in: Date()...)
             } header: {
                 Text("Στοιχεία Ραντεβού")
@@ -51,7 +64,10 @@ struct AppointmentView: View {
                         showAlert = true
                     } else {
                         saveAppointment()
-                        phoneExists ? (): saveClient()
+                        
+                        if !phoneExists {
+                            saveClient()
+                        }
                     }
                 }) {
                     HStack {
@@ -63,9 +79,9 @@ struct AppointmentView: View {
                     }
                 }
                 .foregroundColor(.white)
-                .listRowBackground(clientName.isEmpty ? Color.gray : Color.accentColor) 
+                .listRowBackground(canSave ? Color.accentColor : Color.gray)
             }
-            .disabled(clientName.isEmpty)
+            .disabled(!canSave)
         }
         .alert("Μη έγκυρη ημερομηνία", isPresented: $showAlert) {
             Button("OK", role: .cancel) { }
@@ -75,7 +91,7 @@ struct AppointmentView: View {
         .navigationTitle("Νέο Ραντεβού")
     }
     
-
+    
     private func saveAppointment() {
         let newAppointment = AppointmentModel(
             timestamp: date,
@@ -95,12 +111,7 @@ struct AppointmentView: View {
         )
         modelContext.insert(newAppointment)
     }
-    
-    
 }
-
-
-
 
 #Preview {
     AppointmentView()

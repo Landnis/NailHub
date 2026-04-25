@@ -12,7 +12,8 @@ import SwiftData
 struct NailHubTestApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            AppointmentModel.self,
+            ExistingClientModel.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,7 +26,21 @@ struct NailHubTestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            // Εδώ προσθέτουμε τα TabViews
+            TabView {
+                ContentView()
+                    .tabItem {
+                        Label("Ραντεβού", systemImage: "calendar")
+                    }
+                ClientContainerView()
+                    .tabItem {
+                        Label("Πελάτες", systemImage: "person.2")
+                    }
+                HistoryAppointmentScreen()
+                    .tabItem {
+                        Label("Ιστορικό", systemImage: "clock.arrow.circlepath")
+                    }
+            }
         }
         .modelContainer(sharedModelContainer)
     }

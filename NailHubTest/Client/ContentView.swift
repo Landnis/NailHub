@@ -9,7 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Query(sort: \AppointmentModel.date) private var appointments: [AppointmentModel]
+    @Query(
+        filter: #Predicate<AppointmentModel> { !$0.isCompleted },
+        sort: \.date
+    )
+    private var appointments: [AppointmentModel]
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \ExistingClientModel.clientName) private var employees: [ExistingClientModel]
     @State private var showAddForm = false
@@ -17,6 +21,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottomTrailing) {
+                AppTheme.nailHubBackground
+                    .ignoresSafeArea()
+                
                 if appointments.isEmpty {
                     ContentUnavailableView(
                         "Κανένα Ραντεβού",
@@ -34,9 +41,11 @@ struct ContentView: View {
                                         .foregroundColor(.secondary)
                                 }
                             }
+                            .listRowBackground(AppTheme.nailHubCream)
                         }
                         .onDelete(perform: deleteItems)
                     }
+                    .scrollContentBackground(.hidden)
                 }
                 
                 Button {
@@ -58,6 +67,10 @@ struct ContentView: View {
                 AppointmentView()
             }
         }
+        .onAppear {
+            deletePastAppointments()
+        }
+        
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -65,6 +78,19 @@ struct ContentView: View {
             modelContext.delete(appointments[index])
         }
     }
+    
+    private func deletePastAppointments() {
+        let now = Date()
+        
+        for appointment in appointments {
+            if appointment.date < now && !appointment.isCompleted {
+                appointment.isCompleted = true
+            }
+        }
+        
+        try? modelContext.save()
+    }
+    
 }
 
 
