@@ -63,7 +63,7 @@ struct AppointmentDetailView: View {
                         .padding()
                         .background(Color.blue)
                         .foregroundColor(.white)
-                        .cornerRadius(15)
+                        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
                 }
             }
             .padding()

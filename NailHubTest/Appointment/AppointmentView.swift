@@ -43,9 +43,14 @@ struct AppointmentView: View {
         Form {
             Section {
                 TextField("Όνομα Πελάτισσας", text: $clientName)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.words)
                 TextField("Υπηρεσία", text: $service)
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.words)
                 TextField("Τηλέφωνο", text: $clientPhone)
                     .keyboardType(.numberPad)
+                    .textContentType(.telephoneNumber)
                 DatePicker("Ημερομηνία", selection: $date, in: Date()...)
             } header: {
                 Text("Στοιχεία Ραντεβού")

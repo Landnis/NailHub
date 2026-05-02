@@ -23,23 +23,15 @@ struct NailHubTestApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
+    
+    @State private var showMainApp = false
+    
     var body: some Scene {
         WindowGroup {
-            // Εδώ προσθέτουμε τα TabViews
-            TabView {
-                ContentView()
-                    .tabItem {
-                        Label("Ραντεβού", systemImage: "calendar")
-                    }
-                ClientContainerView()
-                    .tabItem {
-                        Label("Πελάτες", systemImage: "person.2")
-                    }
-                HistoryAppointmentScreen()
-                    .tabItem {
-                        Label("Ιστορικό", systemImage: "clock.arrow.circlepath")
-                    }
+            if showMainApp {
+                MainTabView()
+            } else {
+                WelcomeScreen(showMainApp: $showMainApp)
             }
         }
         .modelContainer(sharedModelContainer)

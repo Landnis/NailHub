@@ -45,6 +45,7 @@ struct ContentView: View {
                         }
                         .onDelete(perform: deleteItems)
                     }
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
                     .scrollContentBackground(.hidden)
                 }
                 
@@ -63,6 +64,7 @@ struct ContentView: View {
                 .padding(.bottom, 20)
             }
             .navigationTitle("Ραντεβού")
+            .navigationBarTitleDisplayMode(.large)
             .navigationDestination(isPresented: $showAddForm) {
                 AppointmentView()
             }

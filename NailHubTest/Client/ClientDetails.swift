@@ -14,10 +14,7 @@ struct ClientDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
-                
                 VStack(alignment: .leading, spacing: 15) {
-                    
-                    // Header
                     HStack {
                         Image(systemName: "person.crop.circle.fill")
                             .font(.system(size: 60))
@@ -29,15 +26,12 @@ struct ClientDetailView: View {
                         }
                     }
                     
-                    Divider()
-                    
-                    // Details
                     DetailRow(icon: "phone.fill", title: "Τηλέφωνο", value: client.clientPhone)
                 }
                 .padding()
                 .background(AppTheme.nailHubCream)
-                .cornerRadius(20)
-                .shadow(radius: 5)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .shadow(color: .black.opacity(0.08), radius: 10, x: 0, y: 5)
                 
                 Button(action: {
                     let telephone = "tel://" + client.clientPhone

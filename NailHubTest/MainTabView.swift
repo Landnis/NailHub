@@ -9,7 +9,22 @@ import SwiftUI
 
 struct MainTabView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            ContentView()
+                .tabItem {
+                    Label("Ραντεβού", systemImage: "calendar")
+                }
+            
+            ClientContainerView()
+                .tabItem {
+                    Label("Πελάτες", systemImage: "person.2")
+                }
+            
+            HistoryAppointmentScreen()
+                .tabItem {
+                    Label("Ιστορικό", systemImage: "clock.arrow.circlepath")
+                }
+        }
     }
 }
 
