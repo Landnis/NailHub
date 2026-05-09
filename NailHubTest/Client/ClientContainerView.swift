@@ -20,29 +20,9 @@ struct ClientContainerView: View {
                 AppTheme.nailHubBackground
                     .ignoresSafeArea()
                 if employees.isEmpty {
-                    ContentUnavailableView(
-                        "Δεν υπάρχουν εργαζόμενοι",
-                        systemImage: "person.3.sequence",
-                        description: Text("Πρόσθεσε το πρώτο μέλος της ομάδας σου για να ξεκινήσεις.")
-                    )
+                    emptyClientView
                 } else {
-                    List {
-                        ForEach(employees) { employee in
-                            ClientDetailView(client: employee)
-                                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                                .listRowBackground(Color.clear)
-                                .swipeActions {
-                                    Button(role: .destructive) {
-                                        modelContext.delete(employee)
-                                    } label: {
-                                        Label("Διαγραφή", systemImage: "trash")
-                                    }
-                                }
-                        }
-                    }
-                    .listStyle(.plain)
-                    .scrollContentBackground(.hidden)
-                    .background(Color.clear)
+                    clientListView
                 }
             }
             .navigationTitle("Πελάτες")
@@ -50,6 +30,37 @@ struct ClientContainerView: View {
         }
     }
     
+}
+
+extension ClientContainerView {
+    
+    var emptyClientView: some View {
+        ContentUnavailableView(
+            "Δεν υπάρχουν εργαζόμενοι",
+            systemImage: "person.3.sequence",
+            description: Text("Πρόσθεσε το πρώτο μέλος της ομάδας σου για να ξεκινήσεις.")
+        )
+    }
+    
+    var clientListView: some View {
+        List {
+            ForEach(employees) { employee in
+                ClientDetailView(client: employee)
+                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+                    .listRowBackground(Color.clear)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            modelContext.delete(employee)
+                        } label: {
+                            Label("Διαγραφή", systemImage: "trash")
+                        }
+                    }
+            }
+        }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(Color.clear)
+    }
 }
 
 #Preview {

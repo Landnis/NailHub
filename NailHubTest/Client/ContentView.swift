@@ -25,43 +25,12 @@ struct ContentView: View {
                     .ignoresSafeArea()
                 
                 if appointments.isEmpty {
-                    ContentUnavailableView(
-                        "Κανένα Ραντεβού",
-                        systemImage: "calendar.badge.exclamationmark",
-                        description: Text("Πατήστε το κουμπί για να ξεκινήσετε.")
-                    )
+                    emptyContentView
                 } else {
-                    List {
-                        ForEach(appointments) { appointment in
-                            NavigationLink(destination: AppointmentDetailView(appointment: appointment)) {
-                                VStack(alignment: .leading) {
-                                    Text(appointment.clientName).font(.headline)
-                                    Text(appointment.date, style: .date)
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            .listRowBackground(AppTheme.nailHubCream)
-                        }
-                        .onDelete(perform: deleteItems)
-                    }
-                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
-                    .scrollContentBackground(.hidden)
+                    clientListView
                 }
                 
-                Button {
-                    showAddForm = true
-                } label: {
-                    Image(systemName: "calendar.badge.exclamationmark")
-                        .font(.title.bold())
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.accentColor)
-                        .clipShape(Circle())
-                        .shadow(radius: 4, x: 0, y: 4)
-                }
-                .padding(.trailing, 20)
-                .padding(.bottom, 20)
+                addAppointmentButton
             }
             .navigationTitle("Ραντεβού")
             .navigationBarTitleDisplayMode(.large)
@@ -93,6 +62,53 @@ struct ContentView: View {
         try? modelContext.save()
     }
     
+}
+
+extension ContentView {
+    
+    var emptyContentView: some View {
+        ContentUnavailableView(
+            "Κανένα Ραντεβού",
+            systemImage: "calendar.badge.exclamationmark",
+            description: Text("Πατήστε το κουμπί για να ξεκινήσετε.")
+        )
+    }
+    
+    var clientListView: some View {
+        List {
+            ForEach(appointments) { appointment in
+                NavigationLink(destination: AppointmentDetailView(appointment: appointment)) {
+                    VStack(alignment: .leading) {
+                        Text(appointment.clientName).font(.headline)
+                        Text(appointment.date, style: .date)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .listRowBackground(AppTheme.nailHubCream)
+            }
+            .onDelete(perform: deleteItems)
+        }
+        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .scrollContentBackground(.hidden)
+    }
+    
+    var addAppointmentButton: some View {
+        Button {
+            showAddForm = true
+        } label: {
+            Image(systemName: "calendar.badge.exclamationmark")
+                .font(.title.bold())
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.accentColor)
+                .clipShape(Circle())
+                .shadow(radius: 4, x: 0, y: 4)
+        }
+        .shadow(radius: 4, x: 0, y: 4)
+        .padding(.trailing, 20)
+        .padding(.bottom, 20)
+    }
 }
 
 

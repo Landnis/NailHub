@@ -69,7 +69,6 @@ struct AppointmentView: View {
                         showAlert = true
                     } else {
                         saveAppointment()
-                        
                         if !phoneExists {
                             saveClient()
                         }
@@ -83,7 +82,8 @@ struct AppointmentView: View {
                         Spacer()
                     }
                 }
-                .foregroundColor(.white)
+                .shadow(radius: 4, x: 0, y: 4)
+                .foregroundColor(AppTheme.nailHubBtnText)
                 .listRowBackground(canSave ? Color.accentColor : Color.gray)
             }
             .disabled(!canSave)

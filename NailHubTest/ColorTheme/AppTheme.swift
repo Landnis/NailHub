@@ -11,4 +11,6 @@ struct AppTheme {
     static let nailHubBackground = Color("nailHubBackground")
     static let nailHubCream = Color("nailHubCream")
     static let nailHubSoftGray = Color("nailHubSoftGray")
+    static let nailHubStartBtn = Color("nailHubStartBtnColor")
+    static let nailHubBtnText = Color("nailHubMainButtonTextColor")
 }
