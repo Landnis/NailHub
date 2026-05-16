@@ -32,7 +32,11 @@ struct EditAppointmentView: View {
             }
             .navigationTitle("Επεξεργασία")
             .toolbar {
-                Button("Τέλος") { dismiss() }
+                Button("Τέλος") {
+                    NotificationManager.shared.removeNotification(for: appointment)
+                    NotificationManager.shared.scheduleNotification(for: appointment)
+                    dismiss()
+                }
             }
         }
     }

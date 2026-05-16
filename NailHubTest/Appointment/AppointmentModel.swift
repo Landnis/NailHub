@@ -10,6 +10,7 @@ import SwiftData
 
 @Model
 final class AppointmentModel {
+    var id: UUID
     var date: Date
     var clientName: String
     var service: String
@@ -18,6 +19,7 @@ final class AppointmentModel {
     var isCompleted: Bool = false
     
     init(timestamp: Date, clientName: String, service: String, clientPhone: String, notes: String) {
+        self.id = UUID()
         self.date = timestamp
         self.clientName = clientName
         self.service = service

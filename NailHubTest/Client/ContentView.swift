@@ -44,9 +44,10 @@ struct ContentView: View {
         
     }
     
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteAppointments(offsets: IndexSet) {
         for index in offsets {
             modelContext.delete(appointments[index])
+            NotificationManager.shared.removeNotification(for: appointments[index])
         }
     }
     
@@ -87,7 +88,7 @@ extension ContentView {
                 }
                 .listRowBackground(AppTheme.nailHubCream)
             }
-            .onDelete(perform: deleteItems)
+            .onDelete(perform: deleteAppointments)
         }
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 2)
         .scrollContentBackground(.hidden)

@@ -18,10 +18,12 @@ struct AppointmentView: View {
     @State private var date = Date()
     @State private var clientPhone = ""
     @State private var notes = ""
+    @State private var showAlert = false
+    
     private var isPastDate: Bool {
         date < Date()
     }
-    @State private var showAlert = false
+    
     private var phoneExists: Bool {
         existingClients.contains { $0.clientPhone == clientPhone }
     }
@@ -106,6 +108,7 @@ struct AppointmentView: View {
             notes: notes
         )
         modelContext.insert(newAppointment)
+        NotificationManager.shared.scheduleNotification(for: newAppointment)
         dismiss()
     }
     

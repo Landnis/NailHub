@@ -10,12 +10,22 @@ import SwiftData
 
 @main
 struct NailHubTestApp: App {
+
+    init() {
+        NotificationManager.shared.requestPermission()
+        UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
+    }
+
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             AppointmentModel.self,
             ExistingClientModel.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        let modelConfiguration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false
+        )
 
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
