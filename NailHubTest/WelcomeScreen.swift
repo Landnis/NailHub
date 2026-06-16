@@ -7,8 +7,15 @@
 
 import SwiftUI
 
+enum AppFlow {
+    case welcome
+    case onboarding
+    case main
+}
+
 struct WelcomeScreen: View {
-    @Binding var showMainApp: Bool
+    @Binding var flow: AppFlow
+    
     var body: some View {
         ZStack {
             AppTheme.nailHubBackground
@@ -44,7 +51,7 @@ extension WelcomeScreen {
     
     var startBtnView: some View {
         Button(action: {
-            showMainApp = true
+            flow = .main
         }) {
             Text("START")
                 .font(.headline)
@@ -60,5 +67,5 @@ extension WelcomeScreen {
 }
 
 #Preview {
-    WelcomeScreen(showMainApp: .constant(false))
+    WelcomeScreen(flow: .constant(.main))
 }
