@@ -72,23 +72,6 @@ extension OnboardingNameStepView {
             .foregroundColor(AppTheme.textPrimary)
             .autocapitalization(.words)
     }
-    
-    var nextButton: some View {
-        Button(action: {
-            onNext()
-        }) {
-            Text("Continue")
-                .font(.headline)
-                .foregroundColor(textColor)
-                .frame(maxWidth: .infinity)
-                .frame(height: 50)
-                .background(buttonBackground)
-                .cornerRadius(16)
-                .animation(.easeInOut(duration: 0.2), value: name.isEmpty)
-        }
-        .disabled(name.isEmpty)
-        .padding(.bottom, 30)
-    }
 }
 
 extension OnboardingNameStepView {

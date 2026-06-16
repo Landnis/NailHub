@@ -90,6 +90,9 @@ struct AppointmentView: View {
             }
             .disabled(!canSave)
         }
+        .scrollContentBackground(.hidden)
+        .listStyle(.insetGrouped)
+        .background(AppTheme.nailHubBackground)
         .alert("Μη έγκυρη ημερομηνία", isPresented: $showAlert) {
             Button("OK", role: .cancel) { }
         } message: {

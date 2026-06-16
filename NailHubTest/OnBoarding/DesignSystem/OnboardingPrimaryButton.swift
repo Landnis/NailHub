@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnboardingPrimaryButton: View {
     var title: String
-    var isDisabled: Bool
+    var isDisabled: Bool 
     var action: () -> Void
     
     var body: some View {

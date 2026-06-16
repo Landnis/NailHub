@@ -27,7 +27,12 @@ struct OnboardingPreferencesStepView: View {
                 
                 Spacer()
                 
-                nextButton
+                OnboardingPrimaryButton(
+                    title: "Continue",
+                    isDisabled: selectedStyle == nil,
+                    action: onNext
+                )
+                .padding(.bottom, 30)
             }
             .padding(.horizontal, 20)
         }
@@ -41,11 +46,11 @@ extension OnboardingPreferencesStepView {
             Text("What style do you like?")
                 .font(.title2)
                 .fontWeight(.semibold)
-                .foregroundColor(Color.white.opacity(0.9))
+                .foregroundColor(AppTheme.textPrimary)
             
             Text("This helps us personalize suggestions")
                 .font(.subheadline)
-                .foregroundColor(.gray)
+                .foregroundColor(AppTheme.textSecondary)
         }
     }
     
@@ -66,22 +71,6 @@ extension OnboardingPreferencesStepView {
                 }
             }
         }
-    }
-    
-    var nextButton: some View {
-        Button(action: {
-            onNext()
-        }) {
-            Text("Continue")
-                .font(.headline)
-                .foregroundColor(.black)
-                .frame(maxWidth: .infinity)
-                .frame(height: 50)
-                .background(selectedStyle == nil ? Color.gray : AppTheme.nailHubStartBtn)
-                .cornerRadius(16)
-        }
-        .disabled(selectedStyle == nil)
-        .padding(.bottom, 30)
     }
 }
 

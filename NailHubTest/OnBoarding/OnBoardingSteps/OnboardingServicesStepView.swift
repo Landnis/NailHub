@@ -27,7 +27,12 @@ struct OnboardingServicesStepView: View {
                 
                 Spacer()
                 
-                nextButton
+                OnboardingPrimaryButton(
+                    title: "Continue",
+                    isDisabled: selectedServices.isEmpty,
+                    action: onNext
+                )
+                .padding(.bottom, 30)
             }
             .padding(.horizontal, 20)
         }
@@ -41,11 +46,11 @@ extension OnboardingServicesStepView {
             Text("What services do you prefer?")
                 .font(.title2)
                 .fontWeight(.semibold)
-                .foregroundColor(Color.white.opacity(0.9))
+                .foregroundColor(AppTheme.textPrimary)
             
             Text("Select all that apply")
                 .font(.subheadline)
-                .foregroundColor(.gray)
+                .foregroundColor(AppTheme.textSecondary)
         }
     }
     

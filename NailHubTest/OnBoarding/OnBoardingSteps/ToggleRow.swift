@@ -14,7 +14,7 @@ struct ToggleRow: View {
     var body: some View {
         HStack {
             Text(title)
-                .foregroundColor(.white)
+                .foregroundColor(AppTheme.textPrimary)
                 .font(.body)
             
             Spacer()
