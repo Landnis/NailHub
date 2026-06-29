@@ -11,10 +11,11 @@ import SwiftData
 @main
 struct NailHubTestApp: App {
     @AppStorage("onboardingCompleted") var onboardingCompleted = false
+    @State private var flow: AppFlow = .welcome
+
     init() {
         NotificationManager.shared.requestPermission()
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
-        _flow = State(initialValue: onboardingCompleted ? .welcome : .onboarding)
     }
 
     var sharedModelContainer: ModelContainer = {
@@ -35,12 +36,14 @@ struct NailHubTestApp: App {
         }
     }()
     
-    @State private var flow: AppFlow = .welcome
     
     var body: some Scene {
         WindowGroup {
             rootView
                 .modelContainer(sharedModelContainer)
+                .onAppear {
+                    flow = .welcome
+                }
         }
     }
 }
@@ -50,7 +53,6 @@ extension NailHubTestApp {
     @ViewBuilder
     var rootView: some View {
         switch flow {
-            
         case .welcome:
             WelcomeScreen(flow: $flow)
             

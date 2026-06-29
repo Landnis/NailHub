@@ -14,20 +14,29 @@ enum AppFlow {
 }
 
 struct WelcomeScreen: View {
+    
+    @AppStorage("onboardingCompleted") private var onboardingCompleted = false
     @Binding var flow: AppFlow
     
     var body: some View {
+        
         ZStack {
+            
             AppTheme.nailHubBackground
                 .ignoresSafeArea()
             
-            VStack(spacing: 30) {
+            VStack(spacing: 35) {
                 
                 Spacer()
                 
                 mainContainerView
                 
+                AppointmentRevealView()
+                    .frame(height: 260)
+                    .padding(.horizontal, 24)
+                
                 Spacer()
+                
                 startBtnView
             }
         }
@@ -35,34 +44,44 @@ struct WelcomeScreen: View {
 }
 
 extension WelcomeScreen {
-    
+
     var mainContainerView: some View {
-        VStack(spacing: 8) {
+
+        VStack(spacing: 12) {
+
             Text("NAIL HUB")
-                .font(.system(size: 42, weight: .bold, design: .monospaced))
-                .tracking(5)
-                .foregroundColor(Color(red: 0.8, green: 0.6, blue: 0.4))
-            
-            Rectangle()
-                .frame(width: 80, height: 1)
-                .foregroundColor(.gray)
+                .font(.system(size: 42,
+                              weight: .bold,
+                              design: .rounded))
+                .tracking(6)
+                .foregroundColor(AppTheme.textPrimary)
+
+            Text("Smart appointment management")
+                .font(.subheadline)
+                .foregroundColor(AppTheme.textSecondary)
+
+            RoundedRectangle(cornerRadius: 2)
+                .fill(AppTheme.buttonPrimary.opacity(0.35))
+                .frame(width: 70, height: 3)
         }
     }
-    
+}
+
+extension WelcomeScreen {
     var startBtnView: some View {
-        Button(action: {
-            flow = .main
-        }) {
-            Text("START")
-                .font(.headline)
-                .tracking(2)
-                .foregroundColor(.black)
-                .frame(width: 200, height: 50)
-                .background(AppTheme.nailHubStartBtn)
-                .cornerRadius(18)
+        
+        OnboardingPrimaryButton(
+            title: "Get Started",
+            isDisabled: false
+        ) {
+            if onboardingCompleted {
+                flow = .main
+            } else {
+                flow = .onboarding
+            }
         }
-        .padding(.bottom, 50)
-        .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
+        .padding(.horizontal, 32)
+        .padding(.bottom, 40)
     }
 }
 
