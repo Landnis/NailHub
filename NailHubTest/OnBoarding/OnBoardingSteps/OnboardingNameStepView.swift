@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct OnboardingNameStepView: View {
-    
-    @State private var name: String = ""
     @FocusState private var isFocused: Bool
+    @Binding var name: String
     
     var onNext: () -> Void
     
@@ -99,5 +98,5 @@ extension OnboardingNameStepView {
     }
 }
 #Preview {
-    OnboardingNameStepView(onNext: {})
+    OnboardingNameStepView(name: .constant("Kalliopi"), onNext: {})
 }

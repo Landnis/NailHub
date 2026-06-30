@@ -10,36 +10,36 @@ import PhotosUI
 
 struct OnboardingProfilePhotoStepView: View {
     var onNext: () -> Void
+    @Binding var profileImageData: Data?
+    @State private var selectedItem: PhotosPickerItem?
+    @State private var profileImage: UIImage?
+    
+    var body: some View {
         
-        @State private var selectedItem: PhotosPickerItem?
-        @State private var profileImage: UIImage?
-        
-        var body: some View {
+        ZStack {
+            AppTheme.nailHubBackground
+                .ignoresSafeArea()
             
-            ZStack {
-                AppTheme.nailHubBackground
-                    .ignoresSafeArea()
+            VStack(spacing: 30) {
                 
-                VStack(spacing: 30) {
-                    
-                    Spacer()
-                    
-                    titleView
-                    
-                    profilePhotoView
-                    
-                    addPhotoButton
-                    
-                    Spacer()
-                    
-                    actionButtons
-                }
-                .padding(.horizontal, 24)
+                Spacer()
+                
+                titleView
+                
+                profilePhotoView
+                
+                addPhotoButton
+                
+                Spacer()
+                
+                actionButtons
             }
-            .task(id: selectedItem) {
-                await loadSelectedImage()
-            }
+            .padding(.horizontal, 24)
         }
+        .task(id: selectedItem) {
+            await loadSelectedImage()
+        }
+    }
 }
 
 // MARK: - Components
@@ -129,6 +129,7 @@ extension OnboardingProfilePhotoStepView {
             if let data = try await selectedItem.loadTransferable(type: Data.self),
                let image = UIImage(data: data) {
                 profileImage = image
+                profileImageData = data
             }
         } catch {
             print(error.localizedDescription)
@@ -137,5 +138,5 @@ extension OnboardingProfilePhotoStepView {
 }
 
 #Preview {
-    OnboardingProfilePhotoStepView(onNext: {})
+    OnboardingProfilePhotoStepView(onNext: {}, profileImageData: .constant(Data()))
 }

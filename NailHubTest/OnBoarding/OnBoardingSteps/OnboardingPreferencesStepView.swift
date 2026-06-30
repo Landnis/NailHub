@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct OnboardingPreferencesStepView: View {
-    var onNext: () -> Void
     
-    @State private var selectedStyle: NailStyle? = nil
+    @Binding var selectedStyle: NailStyle?
+    var onNext: () -> Void
     
     var body: some View {
         ZStack {
@@ -75,5 +75,5 @@ extension OnboardingPreferencesStepView {
 }
 
 #Preview {
-    OnboardingPreferencesStepView(onNext: {})
+    OnboardingPreferencesStepView(selectedStyle: .constant(.bold), onNext: {})
 }

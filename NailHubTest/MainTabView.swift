@@ -24,6 +24,10 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Ιστορικό", systemImage: "clock.arrow.circlepath")
                 }
+            ProfileView()
+                .tabItem {
+                    Label("Προφίλ", systemImage: "person.crop.circle")
+                }
         }
     }
 }

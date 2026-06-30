@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingServicesStepView: View {
     var onNext: () -> Void
     
-    @State private var selectedServices: Set<ServiceType> = []
+    @Binding var selectedServices: Set<ServiceType>
     
     var body: some View {
         ZStack {
@@ -99,5 +99,5 @@ extension OnboardingServicesStepView {
 }
 
 #Preview {
-    OnboardingServicesStepView(onNext: {})
+    OnboardingServicesStepView(onNext: {}, selectedServices: .constant([]))
 }

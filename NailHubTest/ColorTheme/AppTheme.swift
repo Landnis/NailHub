@@ -17,6 +17,7 @@ struct AppTheme {
         startPoint: .top,
         endPoint: .bottom
     )
+    static let profileIcon = Color("profileIcon")
     static let textPrimary = Color("textPrimary")
     static let textSecondary = Color("textSecondary")
     static let textSoft = Color("textSoft")

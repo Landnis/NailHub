@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ServiceType: String, CaseIterable, Identifiable {
+enum ServiceType: String, CaseIterable, Identifiable, Codable {
     case manicure
     case pedicure
     case gel

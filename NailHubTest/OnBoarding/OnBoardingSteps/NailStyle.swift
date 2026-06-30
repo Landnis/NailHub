@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum NailStyle: String, CaseIterable, Identifiable {
+enum NailStyle: String, CaseIterable, Identifiable, Codable {
     case natural
     case bold
     case nailArt
     case minimal
     case luxury
-    
+
     var id: String { rawValue }
-    
+
     var title: String {
         switch self {
         case .natural: return "Natural"
