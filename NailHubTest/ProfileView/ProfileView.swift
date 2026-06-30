@@ -19,7 +19,6 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 AppTheme.nailHubBackground
                     .ignoresSafeArea()
@@ -35,15 +34,13 @@ struct ProfileView: View {
     private var content: some View {
         Group {
             if let profile {
-                
                 ScrollView {
                     VStack(spacing: 16) {
                         
                         header(profile)
-                        modernStats(profile)
                         appearanceSection
-                        services(profile)
-                        style(profile)
+                        styleSection(profile)
+                        servicesSection(profile)
                     }
                     .padding(.vertical)
                 }
@@ -68,46 +65,52 @@ struct ProfileView: View {
     // MARK: - HEADER
     
     private func header(_ profile: UserProfile) -> some View {
-        VStack(spacing: 14) {
+        VStack(spacing: 12) {
             
-            PhotosPicker(selection: $selectedItem, matching: .images) {
+            ZStack(alignment: .bottomTrailing) {
                 
-                ZStack {
-                    
-                    Circle()
-                        .fill(.ultraThinMaterial)
-                        .frame(width: 140, height: 140)
-                    
-                    if let data = profile.profileImageData,
-                       let uiImage = UIImage(data: data) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 125, height: 125)
-                            .clipShape(Circle())
-                    } else {
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.system(size: 70))
-                            .foregroundStyle(.secondary)
-                    }
-                    
-                    VStack {
-                        HStack {
-                            Spacer()
-                            Image(systemName: "pencil.circle.fill")
-                                .font(.title3)
-                                .foregroundStyle(.white, AppTheme.profileIcon)
-                                .shadow(radius: 3)
+                PhotosPicker(selection: $selectedItem, matching: .images) {
+                    ZStack {
+                        
+                        Circle()
+                            .fill(.ultraThinMaterial)
+                            .frame(width: 140, height: 140)
+                        
+                        if let data = profile.profileImageData,
+                           let uiImage = UIImage(data: data) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 125, height: 125)
+                                .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.crop.circle.fill")
+                                .font(.system(size: 70))
+                                .foregroundStyle(.secondary)
                         }
-                        Spacer()
                     }
-                    .frame(width: 140, height: 140)
+                }
+                .buttonStyle(.plain)
+                
+                PhotosPicker(selection: $selectedItem, matching: .images) {
+                    Image(systemName: "pencil")
+                        .font(.system(size: 14, weight: .bold))
+                        .foregroundStyle(.white)
+                        .padding(10)
+                        .background(AppTheme.profileIcon)
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
                 }
             }
-            .buttonStyle(.plain)
             
-            Text(profile.name)
-                .font(.title2.bold())
+            VStack(spacing: 4) {
+                Text(profile.name)
+                    .font(.title2.bold())
+                
+                Text("Οι προτιμήσεις μου")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
         }
         .padding()
         .frame(maxWidth: .infinity)
@@ -116,54 +119,12 @@ struct ProfileView: View {
         .padding(.horizontal)
     }
     
-    // MARK: - STATS
-    
-    private func modernStats(_ profile: UserProfile) -> some View {
-        HStack(spacing: 12) {
-            
-            statCard(
-                title: "Αγαπημένες Υπηρεσίες",
-                value: "\(profile.selectedServices.count)",
-                icon: "sparkles"
-            )
-            
-            statCard(
-                title: "Στυλ",
-                value: profile.selectedStyle?.title ?? "-",
-                icon: "paintpalette"
-            )
-        }
-        .padding(.horizontal)
-    }
-    
-    private func statCard(title: String, value: String, icon: String) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            
-            HStack {
-                Image(systemName: icon)
-                    .foregroundStyle(AppTheme.profileIcon)
-                Spacer()
-            }
-            
-            Text(value)
-                .font(.headline)
-            
-            Text(title)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.nailHubCream)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
-    }
-    
     // MARK: - APPEARANCE
     
     private var appearanceSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             
-            Text("Εμφάνιση")
+            Label("Εμφάνιση εφαρμογής", systemImage: "circle.lefthalf.filled")
                 .font(.headline)
             
             Picker("Appearance", selection: Binding(
@@ -186,7 +147,7 @@ struct ProfileView: View {
             .pickerStyle(.menu)
             .tint(AppTheme.profileIcon)
             
-            Text("Αλλαγή εμφάνισης της εφαρμογής.")
+            Text("Αλλαγή θέματος της εφαρμογής.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -197,35 +158,21 @@ struct ProfileView: View {
         .padding(.horizontal)
     }
     
-    // MARK: - SERVICES
+    // MARK: - STYLE
     
-    private func services(_ profile: UserProfile) -> some View {
+    private func styleSection(_ profile: UserProfile) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             
-            Text("Υπηρεσίες")
+            Label("Αγαπημένο στυλ", systemImage: "paintpalette")
                 .font(.headline)
             
-            if profile.selectedServices.isEmpty {
-                Text("Δεν υπάρχουν υπηρεσίες")
-                    .foregroundStyle(.secondary)
-                    .font(.subheadline)
-            } else {
-                LazyVGrid(
-                    columns: [
-                        GridItem(.adaptive(minimum: 90), spacing: 8)
-                    ],
-                    spacing: 8
-                ) {
-                    ForEach(profile.selectedServices) { service in
-                        Text(service.title)
-                            .font(.subheadline)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(Color.blue.opacity(0.15))
-                            .clipShape(Capsule())
-                    }
-                }
-            }
+            Text(profile.selectedStyle?.title ?? "Δεν έχει επιλεγεί")
+                .font(.headline)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(AppTheme.profileIcon.opacity(0.15))
+                .clipShape(Capsule())
+            
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -234,16 +181,33 @@ struct ProfileView: View {
         .padding(.horizontal)
     }
     
-    // MARK: - STYLE
+    // MARK: - SERVICES
     
-    private func style(_ profile: UserProfile) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
+    private func servicesSection(_ profile: UserProfile) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
             
-            Text("Στυλ")
+            Label("Αγαπημένες υπηρεσίες", systemImage: "sparkles")
                 .font(.headline)
             
-            Text(profile.selectedStyle?.title ?? "Δεν έχει επιλεγεί")
-                .foregroundStyle(.secondary)
+            if profile.selectedServices.isEmpty {
+                Text("Δεν υπάρχουν επιλεγμένες υπηρεσίες")
+                    .foregroundStyle(.secondary)
+                    .font(.subheadline)
+            } else {
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 100), spacing: 10)],
+                    spacing: 10
+                ) {
+                    ForEach(profile.selectedServices) { service in
+                        Text(service.title)
+                            .font(.subheadline.weight(.medium))
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .background(AppTheme.profileIcon.opacity(0.12))
+                            .clipShape(Capsule())
+                    }
+                }
+            }
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
