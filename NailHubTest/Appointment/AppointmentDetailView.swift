@@ -12,35 +12,44 @@ struct AppointmentDetailView: View {
     @State private var showEditScreen = false
     
     var body: some View {
-        ZStack {
+        NavigationStack {
             
-            AppTheme.nailHubBackground
-                .ignoresSafeArea()
-            ScrollView {
-                VStack(spacing: 20) {
-                    VStack(alignment: .leading, spacing: 15) {
-                        headerSection
+            ZStack {
+                
+                AppTheme.nailHubBackground
+                    .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack(spacing: 20) {
                         
-                        Divider()
+                        VStack(alignment: .leading, spacing: 15) {
+                            
+                            headerSection
+                            
+                            Divider()
+                            
+                            detailsSection
+                            
+                            notesSection
+                        }
+                        .padding()
+                        .background(AppTheme.nailHubCream)
+                        .cornerRadius(20)
+                        .shadow(radius: 5)
                         
-                        detailsSection
-                        
-                        notesSection
+                        callButton
                     }
                     .padding()
-                    .background(AppTheme.nailHubCream)
-                    .cornerRadius(20)
-                    .shadow(radius: 5)
-                    
-                    callButton
                 }
-                .sheet(isPresented: $showEditScreen) {
-                    EditAppointmentView(appointment: appointment)
-                }
-                .padding()
             }
+            .scrollContentBackground(.hidden)
+            .listStyle(.insetGrouped)            
             .navigationTitle("Στοιχεία Ραντεβού")
             .navigationBarTitleDisplayMode(.inline)
+            
+            .sheet(isPresented: $showEditScreen) {
+                EditAppointmentView(appointment: appointment)
+            }
         }
     }
 }
