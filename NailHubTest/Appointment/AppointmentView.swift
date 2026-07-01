@@ -42,62 +42,68 @@ struct AppointmentView: View {
     }
     
     var body: some View {
-        Form {
-            Section {
-                TextField("Όνομα Πελάτισσας", text: $clientName)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.words)
-                TextField("Υπηρεσία", text: $service)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.words)
-                TextField("Τηλέφωνο", text: $clientPhone)
-                    .keyboardType(.numberPad)
-                    .textContentType(.telephoneNumber)
-                DatePicker("Ημερομηνία", selection: $date, in: Date()...)
-            } header: {
-                Text("Στοιχεία Ραντεβού")
-            } footer: {
-                Text("Βεβαιωθείτε ότι τα στοιχεία είναι σωστά πριν την αποθήκευση.")
-            }
-            
-            Section("Σημειώσεις") {
-                TextField("Γράψτε λεπτομέρειες για το ραντεβού (π.χ. χρώμα, σχέδιο)...", text: $notes, axis: .vertical)
-                    .lineLimit(5...10)
-            }
-            
-            Section {
-                Button(action: {
-                    if isPastDate {
-                        showAlert = true
-                    } else {
-                        saveAppointment()
-                        if !phoneExists {
-                            saveClient()
+        NavigationStack {
+            Form {
+                Section {
+                    TextField("Όνομα Πελάτισσας", text: $clientName)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.words)
+                    TextField("Υπηρεσία", text: $service)
+                        .autocorrectionDisabled()
+                        .textInputAutocapitalization(.words)
+                    TextField("Τηλέφωνο", text: $clientPhone)
+                        .keyboardType(.numberPad)
+                        .textContentType(.telephoneNumber)
+                    DatePicker("Ημερομηνία", selection: $date, in: Date()...)
+                } header: {
+                    Text("Στοιχεία Ραντεβού")
+                } footer: {
+                    Text("Βεβαιωθείτε ότι τα στοιχεία είναι σωστά πριν την αποθήκευση.")
+                }
+                
+                Section("Σημειώσεις") {
+                    TextField("Γράψτε λεπτομέρειες για το ραντεβού (π.χ. χρώμα, σχέδιο)...", text: $notes, axis: .vertical)
+                        .lineLimit(5...10)
+                }
+                
+                Section {
+                    Button(action: {
+                        if isPastDate {
+                            showAlert = true
+                        } else {
+                            saveAppointment()
+                            if !phoneExists {
+                                saveClient()
+                            }
+                        }
+                    }) {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "checkmark.circle.fill")
+                            Text("Αποθήκευση Ραντεβού")
+                                .fontWeight(.bold)
+                            Spacer()
                         }
                     }
-                }) {
-                    HStack {
-                        Spacer()
-                        Image(systemName: "checkmark.circle.fill")
-                        Text("Αποθήκευση Ραντεβού")
-                            .fontWeight(.bold)
-                        Spacer()
-                    }
+                    .shadow(radius: 4, x: 0, y: 4)
+                    .foregroundColor(AppTheme.nailHubBtnText)
+                    .listRowBackground(canSave ? Color.accentColor : Color.gray)
                 }
-                .shadow(radius: 4, x: 0, y: 4)
-                .foregroundColor(AppTheme.nailHubBtnText)
-                .listRowBackground(canSave ? Color.accentColor : Color.gray)
+                .disabled(!canSave)
             }
-            .disabled(!canSave)
+            .scrollContentBackground(.hidden)
+            .listStyle(.insetGrouped)
+            .background(AppTheme.nailHubBackground)
+            
+            .navigationTitle("Νέο Ραντεβού")
+            .navigationBarTitleDisplayMode(.inline)
+            .alert("Μη έγκυρη ημερομηνία", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("Δεν μπορείτε να επιλέξετε ημερομηνία στο παρελθόν.")
+            }
         }
-        .alert("Μη έγκυρη ημερομηνία", isPresented: $showAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("Δεν μπορείτε να επιλέξετε ημερομηνία στο παρελθόν.")
-        }
-        .navigationTitle("Νέο Ραντεβού")
     }
-    
     
     private func saveAppointment() {
         let newAppointment = AppointmentModel(

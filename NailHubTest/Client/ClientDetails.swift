@@ -12,15 +12,21 @@ struct ClientDetailView: View {
     let client: ExistingClientModel
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                detailsView
-                callButton
+        NavigationStack {
+            
+            ScrollView {
+                VStack(spacing: 20) {
+                    
+                    detailsView
+                    
+                    callButton
+                }
+                .padding()
             }
-            .padding()
+            .scrollContentBackground(.hidden)
+            .navigationTitle("Στοιχεία Πελάτη")
+            .navigationBarTitleDisplayMode(.large)
         }
-        .navigationTitle("Στοιχεία Υπαλλήλου")
-        .navigationBarTitleDisplayMode(.inline)
     }
     
 }

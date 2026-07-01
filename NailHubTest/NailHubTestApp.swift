@@ -10,16 +10,24 @@ import SwiftData
 
 @main
 struct NailHubTestApp: App {
+    @AppStorage("onboardingCompleted") var onboardingCompleted = false
+    @State private var flow: AppFlow = .welcome
+    @AppStorage("themePreference") private var themePreferenceRaw = ThemePreference.system.rawValue
 
     init() {
         NotificationManager.shared.requestPermission()
         UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
     }
-
+    
+    private var colorScheme: ColorScheme? {
+        (ThemePreference(rawValue: themePreferenceRaw) ?? .system).colorScheme
+    }
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             AppointmentModel.self,
-            ExistingClientModel.self
+            ExistingClientModel.self,
+            UserProfile.self
         ])
 
         let modelConfiguration = ModelConfiguration(
@@ -34,16 +42,32 @@ struct NailHubTestApp: App {
         }
     }()
     
-    @State private var showMainApp = false
     
     var body: some Scene {
         WindowGroup {
-            if showMainApp {
-                MainTabView()
-            } else {
-                WelcomeScreen(showMainApp: $showMainApp)
-            }
+            rootView
+                .preferredColorScheme(colorScheme)
+                .modelContainer(sharedModelContainer)
+                .onAppear {
+                    flow = .welcome
+                }
         }
-        .modelContainer(sharedModelContainer)
+    }
+}
+
+extension NailHubTestApp {
+    
+    @ViewBuilder
+    var rootView: some View {
+        switch flow {
+        case .welcome:
+            WelcomeScreen(flow: $flow)
+            
+        case .onboarding:
+            OnBoardingFlowView(flow: $flow)
+            
+        case .main:
+            MainTabView()
+        }
     }
 }

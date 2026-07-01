@@ -12,31 +12,45 @@ struct AppointmentDetailView: View {
     @State private var showEditScreen = false
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                VStack(alignment: .leading, spacing: 15) {
-                    headerSection
-                    
-                    Divider()
-                    
-                    detailsSection
-                    
-                    notesSection
-                }
-                .padding()
-                .background(AppTheme.nailHubCream)
-                .cornerRadius(20)
-                .shadow(radius: 5)
+        NavigationStack {
+            
+            ZStack {
                 
-                callButton
+                AppTheme.nailHubBackground
+                    .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack(spacing: 20) {
+                        
+                        VStack(alignment: .leading, spacing: 15) {
+                            
+                            headerSection
+                            
+                            Divider()
+                            
+                            detailsSection
+                            
+                            notesSection
+                        }
+                        .padding()
+                        .background(AppTheme.nailHubCream)
+                        .cornerRadius(20)
+                        .shadow(radius: 5)
+                        
+                        callButton
+                    }
+                    .padding()
+                }
             }
+            .scrollContentBackground(.hidden)
+            .listStyle(.insetGrouped)            
+            .navigationTitle("Στοιχεία Ραντεβού")
+            .navigationBarTitleDisplayMode(.inline)
+            
             .sheet(isPresented: $showEditScreen) {
                 EditAppointmentView(appointment: appointment)
             }
-            .padding()
         }
-        .navigationTitle("Στοιχεία Ραντεβού")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
