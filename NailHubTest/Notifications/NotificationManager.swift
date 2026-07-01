@@ -11,7 +11,7 @@ import UserNotifications
 final class NotificationManager {
 
     static let shared = NotificationManager()
-    let minutesBefore: Int = 5
+    let minutesBefore: Int = 120
     private init() {}
 
     func requestPermission() {
@@ -26,14 +26,15 @@ final class NotificationManager {
             }
     }
     
-    func scheduleNotification(for appointment: AppointmentModel, minutesBefore: Int = 5) {
+    func scheduleNotification(for appointment: AppointmentModel, minutesBefore: Int = 120) {
         
         removeNotification(for: appointment)
         
         
         let content = UNMutableNotificationContent()
         content.title = "Υπενθύμιση Ραντεβού"
-        content.body = "Το ραντεβού με \(appointment.clientName) ξεκινά σε \(minutesBefore) λεπτά."
+        let hoursBefore = minutesBefore / 60
+        content.body = "Το ραντεβού με \(appointment.clientName) ξεκινά σε \(hoursBefore) ώρες."
         content.sound = .default
         
         // εδω σετταρω ποσα λεπτά πριν θελω να ερθει push notification.
