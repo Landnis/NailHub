@@ -24,25 +24,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CF5986AC2F938D1400448315 /* NailHubTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NailHubTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF5986BB2F938D1700448315 /* NailHubTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NailHubTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF5986C52F938D1700448315 /* NailHubTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NailHubTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5986AC2F938D1400448315 /* NailHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NailHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5986BB2F938D1700448315 /* NailHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NailHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5986C52F938D1700448315 /* NailHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NailHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		CF5986AE2F938D1400448315 /* NailHubTest */ = {
+		CF5986AE2F938D1400448315 /* NailHub */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NailHubTest;
+			path = NailHub;
 			sourceTree = "<group>";
 		};
-		CF5986BE2F938D1700448315 /* NailHubTestTests */ = {
+		CF5986BE2F938D1700448315 /* NailHubTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NailHubTestTests;
+			path = NailHubTests;
 			sourceTree = "<group>";
 		};
-		CF5986C82F938D1700448315 /* NailHubTestUITests */ = {
+		CF5986C82F938D1700448315 /* NailHubUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = NailHubTestUITests;
+			path = NailHubUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,9 +75,9 @@
 		CF5986A32F938D1400448315 = {
 			isa = PBXGroup;
 			children = (
-				CF5986AE2F938D1400448315 /* NailHubTest */,
-				CF5986BE2F938D1700448315 /* NailHubTestTests */,
-				CF5986C82F938D1700448315 /* NailHubTestUITests */,
+				CF5986AE2F938D1400448315 /* NailHub */,
+				CF5986BE2F938D1700448315 /* NailHubTests */,
+				CF5986C82F938D1700448315 /* NailHubUITests */,
 				CF5986AD2F938D1400448315 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,9 +85,9 @@
 		CF5986AD2F938D1400448315 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CF5986AC2F938D1400448315 /* NailHubTest.app */,
-				CF5986BB2F938D1700448315 /* NailHubTestTests.xctest */,
-				CF5986C52F938D1700448315 /* NailHubTestUITests.xctest */,
+				CF5986AC2F938D1400448315 /* NailHub.app */,
+				CF5986BB2F938D1700448315 /* NailHubTests.xctest */,
+				CF5986C52F938D1700448315 /* NailHubUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,9 +95,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CF5986AB2F938D1400448315 /* NailHubTest */ = {
+		CF5986AB2F938D1400448315 /* NailHub */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CF5986CF2F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTest" */;
+			buildConfigurationList = CF5986CF2F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHub" */;
 			buildPhases = (
 				CF5986A82F938D1400448315 /* Sources */,
 				CF5986A92F938D1400448315 /* Frameworks */,
@@ -108,18 +108,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				CF5986AE2F938D1400448315 /* NailHubTest */,
+				CF5986AE2F938D1400448315 /* NailHub */,
 			);
-			name = NailHubTest;
+			name = NailHub;
 			packageProductDependencies = (
 			);
 			productName = NailHubTest;
-			productReference = CF5986AC2F938D1400448315 /* NailHubTest.app */;
+			productReference = CF5986AC2F938D1400448315 /* NailHub.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CF5986BA2F938D1700448315 /* NailHubTestTests */ = {
+		CF5986BA2F938D1700448315 /* NailHubTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CF5986D22F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTestTests" */;
+			buildConfigurationList = CF5986D22F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTests" */;
 			buildPhases = (
 				CF5986B72F938D1700448315 /* Sources */,
 				CF5986B82F938D1700448315 /* Frameworks */,
@@ -131,18 +131,18 @@
 				CF5986BD2F938D1700448315 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				CF5986BE2F938D1700448315 /* NailHubTestTests */,
+				CF5986BE2F938D1700448315 /* NailHubTests */,
 			);
-			name = NailHubTestTests;
+			name = NailHubTests;
 			packageProductDependencies = (
 			);
 			productName = NailHubTestTests;
-			productReference = CF5986BB2F938D1700448315 /* NailHubTestTests.xctest */;
+			productReference = CF5986BB2F938D1700448315 /* NailHubTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CF5986C42F938D1700448315 /* NailHubTestUITests */ = {
+		CF5986C42F938D1700448315 /* NailHubUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CF5986D52F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTestUITests" */;
+			buildConfigurationList = CF5986D52F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubUITests" */;
 			buildPhases = (
 				CF5986C12F938D1700448315 /* Sources */,
 				CF5986C22F938D1700448315 /* Frameworks */,
@@ -154,13 +154,13 @@
 				CF5986C72F938D1700448315 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				CF5986C82F938D1700448315 /* NailHubTestUITests */,
+				CF5986C82F938D1700448315 /* NailHubUITests */,
 			);
-			name = NailHubTestUITests;
+			name = NailHubUITests;
 			packageProductDependencies = (
 			);
 			productName = NailHubTestUITests;
-			productReference = CF5986C52F938D1700448315 /* NailHubTestUITests.xctest */;
+			productReference = CF5986C52F938D1700448315 /* NailHubUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -186,7 +186,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CF5986A72F938D1400448315 /* Build configuration list for PBXProject "NailHubTest" */;
+			buildConfigurationList = CF5986A72F938D1400448315 /* Build configuration list for PBXProject "NailHub" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -200,9 +200,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CF5986AB2F938D1400448315 /* NailHubTest */,
-				CF5986BA2F938D1700448315 /* NailHubTestTests */,
-				CF5986C42F938D1700448315 /* NailHubTestUITests */,
+				CF5986AB2F938D1400448315 /* NailHub */,
+				CF5986BA2F938D1700448315 /* NailHubTests */,
+				CF5986C42F938D1700448315 /* NailHubUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,12 +258,12 @@
 /* Begin PBXTargetDependency section */
 		CF5986BD2F938D1700448315 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CF5986AB2F938D1400448315 /* NailHubTest */;
+			target = CF5986AB2F938D1400448315 /* NailHub */;
 			targetProxy = CF5986BC2F938D1700448315 /* PBXContainerItemProxy */;
 		};
 		CF5986C72F938D1700448315 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CF5986AB2F938D1400448315 /* NailHubTest */;
+			target = CF5986AB2F938D1400448315 /* NailHub */;
 			targetProxy = CF5986C62F938D1700448315 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -488,7 +488,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NailHubTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NailHubTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NailHub.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NailHub";
 			};
 			name = Debug;
 		};
@@ -510,7 +510,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NailHubTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NailHubTest";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NailHub.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NailHub";
 			};
 			name = Release;
 		};
@@ -557,7 +557,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CF5986A72F938D1400448315 /* Build configuration list for PBXProject "NailHubTest" */ = {
+		CF5986A72F938D1400448315 /* Build configuration list for PBXProject "NailHub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF5986CD2F938D1700448315 /* Debug */,
@@ -566,7 +566,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CF5986CF2F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTest" */ = {
+		CF5986CF2F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF5986D02F938D1700448315 /* Debug */,
@@ -575,7 +575,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CF5986D22F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTestTests" */ = {
+		CF5986D22F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF5986D32F938D1700448315 /* Debug */,
@@ -584,7 +584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CF5986D52F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubTestUITests" */ = {
+		CF5986D52F938D1700448315 /* Build configuration list for PBXNativeTarget "NailHubUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CF5986D62F938D1700448315 /* Debug */,

@@ -1,6 +1,6 @@
 //
-//  NailHubTestApp.swift
-//  NailHubTest
+//  NailHubApp.swift
+//  NailHub
 //
 //  Created by Konstantinos Stergiannis on 18/4/26.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct NailHubTestApp: App {
+struct NailHubApp: App {
     @AppStorage("onboardingCompleted") var onboardingCompleted = false
     @State private var flow: AppFlow = .welcome
     @AppStorage("themePreference") private var themePreferenceRaw = ThemePreference.system.rawValue
@@ -55,7 +55,7 @@ struct NailHubTestApp: App {
     }
 }
 
-extension NailHubTestApp {
+extension NailHubApp {
     
     @ViewBuilder
     var rootView: some View {

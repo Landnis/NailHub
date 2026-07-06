@@ -1,13 +1,13 @@
 //
-//  NailHubTestUITestsLaunchTests.swift
-//  NailHubTestUITests
+//  NailHubUITestsLaunchTests.swift
+//  NailHubUITests
 //
 //  Created by Konstantinos Stergiannis on 18/4/26.
 //
 
 import XCTest
 
-final class NailHubTestUITestsLaunchTests: XCTestCase {
+final class NailHubUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

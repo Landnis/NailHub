@@ -1,13 +1,13 @@
 //
-//  NailHubTestUITests.swift
-//  NailHubTestUITests
+//  NailHubUITests.swift
+//  NailHubUITests
 //
 //  Created by Konstantinos Stergiannis on 18/4/26.
 //
 
 import XCTest
 
-final class NailHubTestUITests: XCTestCase {
+final class NailHubUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

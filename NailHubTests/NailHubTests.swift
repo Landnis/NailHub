@@ -1,14 +1,14 @@
 //
-//  NailHubTestTests.swift
-//  NailHubTestTests
+//  NailHubTests.swift
+//  NailHubTests
 //
 //  Created by Konstantinos Stergiannis on 18/4/26.
 //
 
 import Testing
-@testable import NailHubTest
+@testable import NailHub
 
-struct NailHubTestTests {
+struct NailHubTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
