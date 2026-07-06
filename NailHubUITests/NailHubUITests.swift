@@ -10,34 +10,68 @@ import XCTest
 final class NailHubUITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    // MARK: - Launch + Welcome
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func test_app_launch_shows_welcome_screen() {
         let app = XCUIApplication()
+        app.launchArguments = ["UI-Testing"]
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // XCUIAutomation Documentation
-        // https://developer.apple.com/documentation/xcuiautomation
+        let welcome = app.otherElements["WelcomeScreen"]
+
+        XCTAssertTrue(welcome.waitForExistence(timeout: 5))
     }
 
+    // MARK: - App state
+
     @MainActor
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-        }
+    func test_app_stays_in_foreground() {
+        let app = XCUIApplication()
+        app.launchArguments = ["UI-Testing"]
+        app.launch()
+
+        XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    // MARK: - Clients screen
+
+    @MainActor
+    func test_client_screen_opens() {
+        let app = XCUIApplication()
+        app.launchArguments = ["UI-Testing"]
+        app.launch()
+
+        let screen = app.otherElements["ClientContainerView"]
+
+        XCTAssertTrue(screen.waitForExistence(timeout: 5))
+    }
+
+    // MARK: - Empty state
+
+    @MainActor
+    func test_empty_state_shows_message() {
+        let app = XCUIApplication()
+        app.launchArguments = ["UI-Testing", "EMPTY"]
+        app.launch()
+
+        XCTAssertTrue(
+            app.staticTexts["Δεν υπάρχουν εργαζόμενοι"]
+                .waitForExistence(timeout: 5)
+        )
+    }
+
+    // MARK: - Data state
+
+    @MainActor
+    func test_list_state_shows_clients() {
+        let app = XCUIApplication()
+        app.launchArguments = ["UI-Testing", "HAS_DATA"]
+        app.launch()
+
+        XCTAssertTrue(app.tables.firstMatch.waitForExistence(timeout: 5))
     }
 }

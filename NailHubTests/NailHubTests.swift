@@ -8,12 +8,41 @@
 import Testing
 @testable import NailHub
 
-struct NailHubTests {
+struct AppFlowTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-        // Swift Testing Documentation
-        // https://developer.apple.com/documentation/testing
+    @Test
+    func app_starts_in_welcome_flow() {
+        let flow = AppFlow.welcome
+        #expect(flow == .welcome)
     }
+}
 
+// MARK: - Model Tests
+
+struct ExistingClientModelTests {
+
+    @Test
+    func client_model_initializes_correctly() {
+        let client = ExistingClientModel(clientName: "Maria")
+
+        #expect(client.clientName == "Maria")
+    }
+}
+
+// MARK: - Logic Tests (pure Swift logic)
+
+struct ClientLogicTests {
+
+    @Test
+    func removing_client_works_correctly() {
+        var clients = [
+            ExistingClientModel(clientName: "A"),
+            ExistingClientModel(clientName: "B")
+        ]
+
+        clients.removeAll { $0.clientName == "A" }
+
+        #expect(clients.count == 1)
+        #expect(clients.first?.clientName == "B")
+    }
 }
