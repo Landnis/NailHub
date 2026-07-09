@@ -63,28 +63,6 @@ The project follows a modular structure where each layer has a specific responsi
 
 ---
 
-# 🏗 Architecture
-
-NailHub follows the **MVVM (Model-View-ViewModel)** architecture pattern.
-
-The architecture separates responsibilities into different layers:
-
-```
-        User Interaction
-              |
-              ▼
-          SwiftUI View
-              |
-              ▼
-          ViewModel
-              |
-              ▼
-          Services
-              |
-              ▼
-          Data Source
-```
-
 ### Model
 
 Responsible for representing application data and domain objects.
@@ -156,32 +134,6 @@ Model
 ```
 
 When data changes, SwiftUI automatically updates the interface through its reactive state management system.
-
----
-
-# 🗂 Data Model
-
-The application uses domain models to represent the main entities of NailHub.
-
-Example structure:
-
-```
-Service
- ├── id
- ├── name
- ├── description
- ├── category
- ├── price
- ├── duration
- └── imageURL
-
-
-Category
- ├── id
- └── name
-```
-
-Models are designed to be simple, reusable and easy to extend with additional functionality.
 
 ---
 
