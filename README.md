@@ -205,22 +205,6 @@ Future improvements can include automated testing coverage for business logic an
 
 ---
 
-# 🔮 Future Improvements
-
-Possible future enhancements:
-
-* User authentication
-* Appointment booking system
-* Favorites and saved services
-* Push notifications
-* Local persistence
-* Offline mode
-* Reviews and ratings
-* Localization support
-* Unit and UI testing
-
----
-
 # 📝 Notes
 
 * Built completely with SwiftUI.
